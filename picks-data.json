@@ -1,0 +1,51 @@
+{
+  "picks": [
+    {
+      "initial": "D",
+      "record": "18–9",
+      "units": "+7.4U",
+      "name": "Dustin",
+      "sport": "MLB · Player Prop",
+      "betName": "Ohtani 1+ Total Base",
+      "betLabel": "PowerPlay Pick",
+      "odds": "+107",
+      "badge": "Best Bet"
+    },
+    {
+      "initial": "G",
+      "record": "21–12",
+      "units": "+6.8U",
+      "name": "Gavin",
+      "sport": "NFL · Anytime TD",
+      "betName": "Featured RB Anytime TD",
+      "betLabel": "PowerPlay Pick",
+      "odds": "+125",
+      "badge": "Locked In"
+    },
+    {
+      "initial": "I",
+      "record": "16–10",
+      "units": "+5.9U",
+      "name": "Izzy",
+      "sport": "NBA · Moneyline",
+      "betName": "Home Team ML",
+      "betLabel": "PowerPlay Pick",
+      "odds": "-115",
+      "badge": "Value"
+    }
+  ],
+  "stats": [
+    { "value": "55–31", "label": "Combined record" },
+    { "value": "+20.1U", "label": "Units this season" },
+    { "value": "63.9%", "label": "Win rate" },
+    { "value": "3", "label": "Active cappers" }
+  ],
+  "leaderboard": [
+    { "rank": "01", "name": "Dustin", "sports": "MLB / NFL", "record": "18–9", "winRate": "66.7%", "units": "+7.4U" },
+    { "rank": "02", "name": "Gavin", "sports": "NFL / NBA", "record": "21–12", "winRate": "63.6%", "units": "+6.8U" },
+    { "rank": "03", "name": "Izzy", "sports": "NBA / MLB", "record": "16–10", "winRate": "61.5%", "units": "+5.9U" },
+    { "rank": "04", "name": "Austin", "sports": "MLB / NFL", "record": "—", "winRate": "—", "units": "—" },
+    { "rank": "05", "name": "DJ", "sports": "NBA / NFL", "record": "—", "winRate": "—", "units": "—" },
+    { "rank": "06", "name": "Mejia", "sports": "MLB / NBA", "record": "—", "winRate": "—", "units": "—" }
+  ]
+}

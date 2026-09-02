@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>PowerPlay — Staff</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#000; --card:#0f0f0f; --border:#232323; --text:#fff;
+    --text-dim:#9a9a9a; --green:#34d399; --red:#f87171;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:'Inter',-apple-system,sans-serif; min-height:100vh;
+    display:flex; align-items:center; justify-content:center; padding:20px;
+  }
+  .card{
+    width:100%; max-width:420px; background:var(--card);
+    border:1px solid var(--border); border-radius:16px; padding:36px;
+  }
+  h1{font-size:22px; font-weight:800; margin:0 0 24px;}
+  label{display:block; font-size:13px; color:var(--text-dim); margin-bottom:6px; font-weight:600;}
+  input{
+    width:100%; padding:12px 14px; border-radius:8px; border:1px solid var(--border);
+    background:#161616; color:#fff; font-size:15px; margin-bottom:16px; font-family:inherit;
+  }
+  input:focus{outline:none; border-color:#4a4a4a;}
+  button{
+    width:100%; padding:13px; border-radius:8px; border:none;
+    background:#fff; color:#000; font-weight:700; font-size:15px; cursor:pointer;
+  }
+  button:disabled{opacity:.5; cursor:not-allowed;}
+  .error{color:var(--red); font-size:13px; margin:-8px 0 16px; min-height:16px;}
+  .hidden{display:none;}
+
+  /* Edit view */
+  .topbar{
+    display:flex; justify-content:space-between; align-items:center;
+    max-width:900px; margin:0 auto 24px; padding:0 4px;
+  }
+  .topbar button{width:auto; padding:10px 18px; background:transparent; color:#fff; border:1px solid var(--border);}
+  .section-block{
+    max-width:900px; margin:0 auto 24px; background:var(--card);
+    border:1px solid var(--border); border-radius:14px; padding:24px;
+  }
+  .section-block h2{font-size:16px; margin:0 0 16px;}
+  .field-row{display:grid; grid-template-columns:repeat(auto-fit,minmax(140px,1fr)); gap:10px; margin-bottom:12px; padding-bottom:12px; border-bottom:1px solid var(--border);}
+  .field-row:last-child{border-bottom:none; margin-bottom:0; padding-bottom:0;}
+  .field-row input{margin-bottom:0; font-size:13px; padding:9px 10px;}
+  .field-row-label{font-size:11px; color:var(--text-dim); margin-bottom:4px; display:block;}
+  .save-bar{
+    max-width:900px; margin:24px auto; display:flex; gap:12px; align-items:center;
+  }
+  .save-bar button{width:auto; padding:12px 24px;}
+  .status-msg{font-size:14px;}
+  .status-msg.ok{color:var(--green);}
+  .status-msg.err{color:var(--red);}
+</style>
+</head>
+<body>
+
+<div id="login-view" class="card">
+  <h1>PowerPlay Staff Login</h1>
+  <label for="username">Username</label>
+  <input type="text" id="username" autocomplete="username">
+  <label for="password">Password</label>
+  <input type="password" id="password" autocomplete="current-password">
+  <p class="error" id="login-error"></p>
+  <button id="login-btn">Log in</button>
+</div>
+
+<div id="edit-view" class="hidden">
+  <div class="topbar">
+    <strong>PowerPlay Staff</strong>
+    <button id="logout-btn">Log out</button>
+  </div>
+
+  <div class="section-block">
+    <h2>Today's Picks</h2>
+    <div id="picks-fields"></div>
+  </div>
+
+  <div class="section-block">
+    <h2>Season Stats</h2>
+    <div id="stats-fields"></div>
+  </div>
+
+  <div class="section-block">
+    <h2>Leaderboard</h2>
+    <div id="leaderboard-fields"></div>
+  </div>
+
+  <div class="save-bar">
+    <button id="save-btn">Save changes</button>
+    <span class="status-msg" id="save-status"></span>
+  </div>
+</div>
+
+<script src="staff.js"></script>
+</body>
+</html>

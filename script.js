@@ -1,0 +1,207 @@
+/* =========================================================================
+   Picks, stats, and the leaderboard now live in picks-data.json instead of
+   being hardcoded here — the admin panel (staff.html) edits that file
+   through the secure backend (see the admin-worker/ folder). This file
+   just loads and renders whatever's currently in it.
+   ========================================================================= */
+
+// ---- HOSTS ----
+// Just the names shown as pills in the brand section — not used for the
+// podcast shorts anymore (those aren't split up by host).
+const HOST_NAMES = ["Dustin", "Gavin", "Izzy", "Austin", "DJ", "Mejia"];
+
+/* =========================================================================
+   Nothing below this line needs to be edited to update content.
+   ========================================================================= */
+
+function renderPicks(picks) {
+  const grid = document.getElementById("picks-grid");
+  grid.innerHTML = picks.map(p => `
+    <article class="pick-card">
+      <div class="pick-card-top">
+        <div class="avatar">${p.initial}</div>
+        <div class="pick-card-record">${p.record} &middot; <span class="u-positive">${p.units}</span></div>
+      </div>
+      <h3 class="pick-name">${p.name}</h3>
+      <p class="pick-sport">${p.sport}</p>
+      <hr class="pick-divider">
+      <div class="pick-bet-row">
+        <div>
+          <p class="pick-bet-name">${p.betName}</p>
+          <p class="pick-bet-label">${p.betLabel}</p>
+        </div>
+        <div class="pick-odds">${p.odds}</div>
+      </div>
+      <span class="pick-badge">${p.badge}</span>
+    </article>
+  `).join("");
+}
+
+function renderStats(stats) {
+  const row = document.getElementById("stats-row");
+  row.innerHTML = stats.map(s => `
+    <div class="stat-cell">
+      <p class="stat-value">${s.value}</p>
+      <p class="stat-label">${s.label}</p>
+    </div>
+  `).join("");
+}
+
+function renderLeaderboard(leaderboard) {
+  const body = document.getElementById("leaderboard-body");
+  body.innerHTML = leaderboard.map(r => `
+    <tr>
+      <td class="col-num">${r.rank}</td>
+      <td>
+        <p class="capper-name">${r.name}</p>
+        <p class="capper-sports">${r.sports}</p>
+      </td>
+      <td>${r.record}</td>
+      <td>${r.winRate}</td>
+      <td class="${r.units === '—' ? 'units-empty' : 'units-positive'}">${r.units}</td>
+    </tr>
+  `).join("");
+}
+
+function renderHostPills() {
+  const wrap = document.getElementById("host-pills");
+  wrap.innerHTML = HOST_NAMES.map(name => `<span class="host-pill">${name}</span>`).join("");
+}
+
+function youtubeShortThumbUrl(id) {
+  // YouTube auto-generates a thumbnail for every video/short at this URL —
+  // no need to upload thumbnails yourself.
+  return `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+}
+
+function youtubeShortEmbedUrl(id) {
+  return `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0&loop=1&playlist=${id}`;
+}
+
+async function loadShortsData() {
+  try {
+    const res = await fetch("shorts.json", { cache: "no-store" });
+    if (!res.ok) return [];
+    return await res.json();
+  } catch {
+    return [];
+  }
+}
+
+let ALL_SHORTS = [];
+
+function renderShortsGrid() {
+  const grid = document.getElementById("shorts-grid");
+
+  if (!ALL_SHORTS.length) {
+    grid.innerHTML = `<p class="shorts-empty">No shorts posted yet.</p>`;
+    return;
+  }
+
+  grid.innerHTML = ALL_SHORTS.map((s, i) => `
+    <button class="short-card" type="button" data-index="${i}">
+      <span class="short-thumb-wrap">
+        <img src="${youtubeShortThumbUrl(s.youtubeId)}" alt="" loading="lazy">
+        <span class="short-play-badge"><span>&#9654;</span></span>
+      </span>
+      <p class="short-card-title">${s.title}</p>
+    </button>
+  `).join("");
+
+  grid.querySelectorAll(".short-card").forEach(card => {
+    card.addEventListener("click", () => {
+      const short = ALL_SHORTS[Number(card.dataset.index)];
+      openShortModal(short);
+    });
+  });
+}
+
+let lastFocusedBeforeModal = null;
+
+function openShortModal(short) {
+  const modal = document.getElementById("short-modal");
+  const frame = document.getElementById("short-modal-frame");
+  frame.innerHTML = `<iframe
+      src="${youtubeShortEmbedUrl(short.youtubeId)}"
+      title="${short.title}"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen></iframe>`;
+  lastFocusedBeforeModal = document.activeElement;
+  modal.classList.add("is-open");
+  modal.setAttribute("aria-hidden", "false");
+  document.getElementById("short-modal-close").focus();
+}
+
+function closeShortModal() {
+  const modal = document.getElementById("short-modal");
+  modal.classList.remove("is-open");
+  modal.setAttribute("aria-hidden", "true");
+  document.getElementById("short-modal-frame").innerHTML = ""; // stop playback
+  if (lastFocusedBeforeModal) lastFocusedBeforeModal.focus();
+}
+
+function trapFocusInModal(e) {
+  const modal = document.getElementById("short-modal");
+  if (!modal.classList.contains("is-open") || e.key !== "Tab") return;
+  const focusable = modal.querySelectorAll('button, [href], iframe');
+  if (!focusable.length) return;
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault();
+    last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault();
+    first.focus();
+  }
+}
+
+function setupShortModal() {
+  document.getElementById("short-modal-close").addEventListener("click", closeShortModal);
+  document.getElementById("short-modal-backdrop").addEventListener("click", closeShortModal);
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") closeShortModal();
+    trapFocusInModal(e);
+  });
+}
+
+function setupMobileMenu() {
+  const toggle = document.querySelector(".menu-toggle");
+  const nav = document.querySelector(".main-nav");
+  if (!toggle || !nav) return;
+  toggle.addEventListener("click", () => {
+    const isOpen = nav.classList.toggle("is-open");
+    toggle.setAttribute("aria-expanded", String(isOpen));
+  });
+}
+
+async function initPodcast() {
+  const data = await loadShortsData();
+  ALL_SHORTS = data.map(s => ({ title: s.title, youtubeId: s.id }));
+  renderShortsGrid();
+}
+
+async function loadPicksData() {
+  try {
+    const res = await fetch("picks-data.json", { cache: "no-store" });
+    if (!res.ok) return { picks: [], stats: [], leaderboard: [] };
+    return await res.json();
+  } catch {
+    return { picks: [], stats: [], leaderboard: [] };
+  }
+}
+
+async function initPicksData() {
+  const data = await loadPicksData();
+  renderPicks(data.picks || []);
+  renderStats(data.stats || []);
+  renderLeaderboard(data.leaderboard || []);
+}
+
+document.getElementById("year").textContent = new Date().getFullYear();
+
+initPicksData();
+renderHostPills();
+initPodcast();
+setupShortModal();
+setupMobileMenu();
