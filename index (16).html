@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PowerPlay — Daily Picks. Real Results.</title>
+<meta name="description" content="Your daily source for sports betting picks, analysis, and PowerPlay podcast content.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="#top" class="logo">
+      <svg class="logo-mark" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="currentColor"/>
+      </svg>
+      <span>POWERPLAY</span>
+    </a>
+    <nav class="main-nav">
+      <a href="#top">Home</a>
+      <a href="#picks">Daily Picks</a>
+      <a href="#leaderboard">Leaderboard</a>
+      <a href="#podcast">Podcast</a>
+      <a href="#about">About</a>
+    </nav>
+    <a href="#picks" class="btn btn-white btn-nav">Today's Picks</a>
+    <button class="menu-toggle" aria-label="Menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO -->
+  <section class="hero wrap">
+    <div class="eyebrow-pill"><span class="dot"></span>SPORTS BETTING PODCAST</div>
+    <h1 class="hero-title">
+      <span class="hero-line-white">Daily Picks.</span>
+      <span class="hero-line-gray">Real Results.</span>
+    </h1>
+    <p class="hero-sub">Your daily source for sports betting picks, analysis, and PowerPlay podcast content.</p>
+    <div class="hero-actions">
+      <a href="#picks" class="btn btn-white">Today's Picks <span aria-hidden="true">&rarr;</span></a>
+      <a href="#podcast" class="btn btn-outline">Listen to the Podcast</a>
+    </div>
+  </section>
+
+  <!-- TODAY'S PICKS -->
+  <section id="picks" class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">POWERPLAY BOARD</p>
+          <h2 class="section-title">Today's Picks</h2>
+        </div>
+        <p class="section-note">Updated daily &middot; Demo picks for layout</p>
+      </div>
+
+      <div class="picks-grid" id="picks-grid"><!-- filled by script.js --></div>
+
+      <div class="stats-row" id="stats-row"><!-- filled by script.js --></div>
+    </div>
+  </section>
+
+  <!-- LEADERBOARD -->
+  <section id="leaderboard" class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">TRACK THE SQUAD</p>
+          <h2 class="section-title">Leaderboard</h2>
+        </div>
+        <p class="section-note">Season-to-date</p>
+      </div>
+
+      <div class="table-wrap">
+        <table class="leaderboard-table">
+          <thead>
+            <tr>
+              <th class="col-num">#</th>
+              <th>Capper</th>
+              <th>Record</th>
+              <th>Win Rate</th>
+              <th>Units</th>
+            </tr>
+          </thead>
+          <tbody id="leaderboard-body"><!-- filled by script.js --></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- PODCAST -->
+  <section id="podcast" class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">LISTEN IN</p>
+          <h2 class="section-title">PowerPlay Podcast</h2>
+        </div>
+        <p class="section-note">Shorts from every host.</p>
+      </div>
+
+      <div class="host-tabs" id="host-tabs" role="tablist"><!-- filled by script.js --></div>
+
+      <div class="shorts-grid" id="shorts-grid"><!-- filled by script.js --></div>
+    </div>
+  </section>
+
+  <!-- SHORT PLAYER MODAL -->
+  <div class="short-modal" id="short-modal" aria-hidden="true">
+    <div class="short-modal-backdrop" id="short-modal-backdrop"></div>
+    <div class="short-modal-inner">
+      <button class="short-modal-close" id="short-modal-close" aria-label="Close">&times;</button>
+      <div class="short-modal-frame" id="short-modal-frame"></div>
+    </div>
+  </div>
+
+  <!-- BRAND / ABOUT -->
+  <section id="about" class="section brand-section">
+    <div class="wrap brand-grid">
+      <div>
+        <p class="eyebrow">THE BRAND</p>
+        <h2 class="brand-title">Sports talk with a competitive edge.</h2>
+      </div>
+      <div class="brand-copy">
+        <p>PowerPlay brings multiple hosts together for daily sports betting picks, matchup analysis, and podcast conversations. The goal is simple: make the card easier to understand and the content more fun to follow.</p>
+        <div class="host-pills" id="host-pills"><!-- filled by script.js --></div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <a href="#top" class="logo">
+      <svg class="logo-mark" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M13 2 4 14h6l-1 8 9-12h-6l1-8Z" fill="currentColor"/>
+      </svg>
+      <span>POWERPLAY</span>
+    </a>
+    <p class="footer-note">&copy; <span id="year"></span> PowerPlay. For entertainment purposes only. Bet responsibly.</p>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
