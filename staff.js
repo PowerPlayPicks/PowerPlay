@@ -1,5 +1,5 @@
 // EDIT THIS: point at your deployed Worker's URL (from `wrangler deploy`).
-const WORKER_URL = "https://powerplay-admin.YOUR-SUBDOMAIN.workers.dev";
+   const WORKER_URL = "https://powerplay-admin.powerplaypicksadmin.workers.dev";
 
 // The session token is kept ONLY in this variable — never in localStorage,
 // sessionStorage, or a cookie. That means refreshing the page logs you out
