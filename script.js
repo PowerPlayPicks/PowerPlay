@@ -69,7 +69,7 @@ const HOSTS = [
   {
     name: "Dustin",
     shorts: [
-      { title: "Ohtani prop breakdown", youtubeId: "REPLACE_WITH_SHORT_ID" },
+      { title: "Ohtani prop breakdown", youtubeId: "wYK-ISxxZ9k?si=NSWamovA-UnR1rvz" },
       { title: "Why I'm on the Under tonight", youtubeId: "REPLACE_WITH_SHORT_ID" }
     ]
   },
