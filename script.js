@@ -82,7 +82,7 @@ const HOSTS = [
   {
     name: "Izzy",
     shorts: [
-      { title: "Home ML lock breakdown", youtubeId: "REPLACE_WITH_SHORT_ID" }
+      { title: "Home ML lock breakdown", youtubeId: "5oOoSInx06s" }
     ]
   },
   {
